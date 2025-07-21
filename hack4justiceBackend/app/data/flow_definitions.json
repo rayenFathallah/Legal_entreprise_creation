@@ -1,0 +1,40 @@
+[
+  {
+    "slot_key": "intent_type",
+    "prompt": "Veuillez préciser si c’est une création ou mise à jour, s’il vous plaît.",
+    "retry_prompt": "Je n'ai pas compris. Veuillez répondre par 'création' ou 'mise à jour'.",
+    "validation": "classify_intent"
+  },
+  {
+    "slot_key": "type_ent",
+    "prompt": "Quel type d’entité voulez-vous ?",
+    "retry_prompt": "Je n'ai pas compris. Veuillez indiquer un type d’entité valide.",
+    "validation": "validate_type_ent"
+  },
+  {
+    "slot_key": "needs_documents_or_penalty",
+    "prompt": "Avez-vous besoin des documents requis pour la procédure ou des informations sur l’amende ?\nRépondez par 'documents' ou 'amende'.",
+    "retry_prompt": "Je n'ai pas compris. Répondez *uniquement* par 'documents' ou 'amende'.",
+    "validation": "one_of_documents_or_penalty"
+  },
+  {
+    "slot_key": "creation_date",
+    "prompt": "Quelle est la date de création (JJ/MM/AAAA) ? (Uniquement si vous avez choisi 'amende')",
+    "retry_prompt": "Format de date incorrect. Merci d'envoyer la date sous la forme JJ/MM/AAAA.",
+    "validation": "valid_date_string",
+    "conditional_on": {
+      "slot_key": "needs_documents_or_penalty",
+      "equals": "amende"
+    }
+  },
+  {
+    "slot_key": "update_action",
+    "prompt": "Quelle mise à jour précise souhaitez-vous effectuer ? Choisissez (ou laissez Gemini choisir) l’une des actions de mise à jour.",
+    "retry_prompt": "Je n'ai pas reconnu cette action de mise à jour. Veuillez choisir exactement l’une des options listées.",
+    "validation": "validate_update_action",
+    "conditional_on": {
+      "slot_key": "intent_type",
+      "equals": "mise à jour"
+    }
+  }
+]

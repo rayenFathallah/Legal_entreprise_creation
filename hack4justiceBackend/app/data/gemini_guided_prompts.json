@@ -1,0 +1,30 @@
+{
+  "classify_intent": {
+    "description": "Détermine si cette requête utilisateur : '<USER_PROMPT>' concerne LA CRÉATION, LA MISE À JOUR ou si ce n'est pas clair (unknown). L'utilisateur peut répondre par un mot ou par une phrase. Réponds uniquement en JSON avec le champ \"intent_type\" et la valeur \"création\", \"mise à jour\" ou \"unknown\".",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds en JSON : { \"intent_type\": \"création\" } ou { \"intent_type\": \"mise à jour\" } ou { \"intent_type\": \"unknown\" }."
+  },
+  "one_of_documents_or_penalty": {
+    "description": "Selon cette prompt : '<USER_PROMPT>' L'utilisateur veut-il des informations sur les documents requis ou sur l'amende ? Réponds uniquement en JSON avec { \"choice\": \"documents\" } ou { \"choice\": \"amende\" }.",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds en JSON : { \"choice\": \"documents\" } ou { \"choice\": \"amende\" }."
+  },
+  "valid_date_string": {
+    "description": "Selon cette prompt : '<USER_PROMPT>' Vérifie que la date soit au format JJ/MM/AAAA et corresponde à une date valide. Si oui, renvoie JSON : { \"date\": \"JJ/MM/AAAA\" }. Sinon, { \"error\": \"invalid_date\" }.",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds en JSON : { \"date\": \"JJ/MM/AAAA\" } ou { \"error\": \"invalid_date\" }."
+  },
+  "classify_type_ent_mise_a_jour": {
+    "description": "Selon cette prompt : '<USER_PROMPT>' L'utilisateur parle-t-il d'un ‘Etablissement Public’, ‘Association’ ou ‘Sociétés’ ? Réponds uniquement en JSON : { \"type_ent\": \"Association\" } ou { \"type_ent\": \"Sociétés\" } ou { \"type_ent\": \"Etablissement Public\" }.",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds en JSON : { \"type_ent\": \"Association\" } ou { \"type_ent\": \"Sociétés\" } ou { \"type_ent\": \"Etablissement Public\" }."
+  },
+  "choose_update_action": {
+    "description": "Selon cette prompt : '<USER_PROMPT>'  Parmi la liste des actions de mise à jour, laquelle veut l'utilisateur ? Réponds uniquement en JSON avec { \"update_action\": \"<valeur exacte>\" }.",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds en JSON : { \"update_action\": \"Transfert du siège\" }"
+  },
+  "match_type_ent_creation": {
+    "description": "Selon cette prompt : '<USER_PROMPT>'\n\nVoici la LISTE COMPLÈTE DES TYPES D’ENTITÉS VALIDES pour une **création** :\n- Société anonyme\n- Groupement d'intérêt économique\n- Etablissement stable\n- Succursale d’une société étrangère\n- Etablissement public\n- Réseau d'associations\n- Association tunisienne régie par le décret-loi n° 88/2011 portant organisation des associations\n- Association tunisienne régie par des réglementations particulières\n- Filiale d'une association étrangère régie par le décret-loi n° 88/2011 portant organisation des associations\n- Filiale d'une association étrangère régie par des réglementations particulières\n- Sarl/Suarl/La société en nom collectif/La société en commandite par actions/La société en commandite simple/Société civile\n- Syndicat des propriétaires\n- Société mutuelle de services agricoles\n- Associations mutuelles\n- Les Centres d’affaires d’intérêt public économique\n- Les groupements de développement dans le secteur de l’agriculture et de la pêche\n- Les centres techniques dans les secteurs industriels/les centres techniques dans le secteur agricole\n- Les groupements de médecine du travail\n- Groupements interprofessionnels dans le secteur agricole et agro-alimentaire\n- Les groupements de maintenance et de gestion des zones industrielles\n- Les sociétés civiles professionnelles\n- Les sociétés mutuelles d’assurances\n- Les coopératives\n- Syndicat professionnel\n- Parti politique\n- Sociétés citoyennes locales ou régionales\n- tout type d'entreprise\n\nL’utilisateur peut donner un nom partiel, mal orthographié ou une description. Identifie **la seule entrée la plus proche** dans ce tableau. Si plusieurs entrées semblent possibles, renvoie un JSON avec tous les choix trouvés.",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds uniquement en JSON : { \"candidates\": [\"Société anonyme\"] } ou { \"candidates\": [\"Société anonyme\", \"Sarl/Suarl\"] } si tu trouves plusieurs."
+  },
+  "match_type_ent_mise_a_jour": {
+    "description": "Selon cette prompt : '<USER_PROMPT>'\n\nVoici la LISTE COMPLÈTE DES TYPES D’ENTITÉS VALIDES pour une **mise à jour** :\n- Etablissement Public\n- Association\n- Sociétés\n\nL’utilisateur peut donner un nom partiel, mal orthographié ou une description. Identifie **la seule entrée la plus proche** dans ce tableau. Si plusieurs entrées semblent possibles, renvoie un JSON avec tous les choix trouvés.",
+    "example_prompt_format": "Utilisateur: \"<USER_INPUT_HERE>\"\n→ Réponds uniquement en JSON : { \"candidates\": [\"Association\"] } ou { \"candidates\": [\"Association\", \"Sociétés\"] } si tu trouves plusieurs."
+  }
+}

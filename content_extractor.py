@@ -6,7 +6,7 @@ import os
 import pdfplumber
 
 # Configure Gemini with your API key
-genai.configure(api_key="api-key-here")
+genai.configure(api_key="AIzaSyCEHAsV_7ZR8XJjUklhUkW6wl3t6dMchH8")
 
 # Initialize Gemini model
 model = genai.GenerativeModel('models/gemini-2.0-flash')
